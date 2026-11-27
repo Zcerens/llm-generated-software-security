@@ -1,0 +1,63 @@
+                   
+                   
+┌─────────────────┐
+│ 7 Code Findings │
+└─────────────────┘
+                         
+  [36m[22m[24m  app.py[0m
+    ❯❱ [1mpython.flask.security.audit.render-template-string.render-template-[0m
+  [1m     string[0m                                                             
+          [31m[1m[24m❰❰ Blocking ❱❱[0m
+          Found a template created with string formatting. This is    
+          susceptible to server-side template injection and cross-site
+          scripting attacks.                                          
+          Details: https://sg.run/8yjE                                
+                                                                      
+          519┆ return render_template_string(
+          520┆     HTML,
+          521┆     page="register",
+          522┆     error="Username and password are required."
+          523┆ )
+            ⋮┆----------------------------------------
+          545┆ return render_template_string(
+          546┆     HTML,
+          547┆     page="register",
+          548┆     error="Username already exists."
+          549┆ )
+            ⋮┆----------------------------------------
+          555┆ return render_template_string(
+          556┆     HTML,
+          557┆     page="register",
+          558┆     error=None
+          559┆ )
+            ⋮┆----------------------------------------
+          591┆ return render_template_string(
+          592┆     HTML,
+          593┆     page="login",
+          594┆     error="Invalid username or password."
+          595┆ )
+            ⋮┆----------------------------------------
+          597┆ return render_template_string(
+          598┆     HTML,
+          599┆     page="login",
+          600┆     error=None
+          601┆ )
+            ⋮┆----------------------------------------
+          674┆ return render_template_string(
+          675┆     HTML,
+          676┆     page="notes",
+          677┆     username=session["username"],
+          678┆     notes=notes,
+          679┆     keyword=keyword
+          680┆ )
+   
+    ❯❱ [1mpython.flask.security.audit.debug-enabled.debug-enabled[0m
+          [31m[1m[24m❰❰ Blocking ❱❱[0m
+          Detected Flask app with debug=True. Do not deploy to       
+          production with this flag enabled as it will leak sensitive
+          information. Instead, consider using Flask configuration   
+          variables or setting 'debug' using system environment      
+          variables.                                                 
+          Details: https://sg.run/dKrd                               
+                                                                     
+          814┆ app.run(debug=True)
