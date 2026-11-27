@@ -1,0 +1,1 @@
+The Flask secret_key is hardcoded, which lets anyone forge a valid session cookie and impersonate any user. Fix this: generate the secret_key randomly and load it from an environment variable (e.g. FLASK_SECRET_KEY), with a safe random fallback for local dev only. Also change debug=True to read from an environment variable instead of being hardcoded.
